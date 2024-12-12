@@ -1,7 +1,7 @@
 "use client";
 
 import DataContainer from "@/components/dataContainer";
-import { Repo } from "@/lib/types/apiTypes";
+import { Repo, ReposResponse } from "@/lib/types/apiTypes";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -11,10 +11,11 @@ import Link from "next/link";
 import Code from "@mui/icons-material/Code";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
+import Pagination from "@mui/material/Pagination";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 type ReposViewProps = {
-  repos: Repo[];
+  repos: ReposResponse;
 };
 
 export default function ReposView({ repos }: ReposViewProps) {
@@ -24,6 +25,8 @@ export default function ReposView({ repos }: ReposViewProps) {
 
   const searchOrderBy = searchParams.get("orderBy") ?? "rating";
   const searchOrderStyle = searchParams.get("orderStyle") ?? "desc";
+
+  const page = searchParams.get("page") ?? 1;
 
   const filterRepoList = ({
     orderBy,
@@ -35,7 +38,16 @@ export default function ReposView({ repos }: ReposViewProps) {
     route.replace(
       `/${params.username}/repos?orderBy=${
         orderBy ?? searchOrderBy
-      }&orderStyle=${orderStyle ?? searchOrderStyle}`
+      }&orderStyle=${orderStyle ?? searchOrderStyle}&page=${page}`
+    );
+  };
+
+  const handleChangePage = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    route.replace(
+      `/${params.username}/repos?orderBy=${searchOrderBy}&orderStyle=${searchOrderStyle}&page=${value}`
     );
   };
 
@@ -71,7 +83,7 @@ export default function ReposView({ repos }: ReposViewProps) {
             <MenuItem value="desc">Decrescente</MenuItem>
           </TextField>
         </Box>
-        {repos.map((repo, index) => (
+        {repos.data.map((repo, index) => (
           <Box key={index} display="flex" flexDirection="column" gap={2}>
             <Box>
               <Box
@@ -92,10 +104,13 @@ export default function ReposView({ repos }: ReposViewProps) {
               <Typography variant="subtitle2">{repo.description}</Typography>
             </Box>
             <Box display="flex" alignItems="center" gap={2}>
-              <Box display="flex" alignItems="center" gap={0.5}>
-                <Code fontSize="small" />
-                <Typography variant="caption">{repo.lang}</Typography>
-              </Box>
+              {repo.lang && (
+                <Box display="flex" alignItems="center" gap={0.5}>
+                  <Code fontSize="small" />
+                  <Typography variant="caption">{repo.lang}</Typography>
+                </Box>
+              )}
+
               <Box display="flex" alignItems="center">
                 <Star fontSize="small" sx={{ color: "yellow" }} />
                 <Typography variant="caption">{repo.stars}</Typography>
@@ -104,6 +119,14 @@ export default function ReposView({ repos }: ReposViewProps) {
             <Divider />
           </Box>
         ))}
+        <Pagination
+          count={repos.totalItems}
+          color="primary"
+          defaultValue={Number(page)}
+          page={Number(page)}
+          onChange={handleChangePage}
+          sx={{ alignSelf: "center" }}
+        />
       </Box>
     </DataContainer>
   );

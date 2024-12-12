@@ -1,4 +1,4 @@
-import { Repo } from "@/lib/types/apiTypes";
+import { Repo, ReposResponse } from "@/lib/types/apiTypes";
 import ReposView from "@/views/repos";
 import axios from "axios";
 
@@ -10,26 +10,46 @@ export default async function Repos({
   params: { username: string };
 }) {
   const { username } = await params;
+  const { perPage = 10, page = 1 } = await searchParams;
   const response = await axios(
-    `https://api.github.com/users/${username}/repos`
+    `https://api.github.com/users/${username}/repos?per_page=${perPage}&page=${page}`
   );
 
+  let totalItems = response.data.length;
+
+  const linkHeader = response.headers.link;
+
+  if (linkHeader) {
+    const lastPageMatch = linkHeader.match(/&page=(\d+)>; rel="last"/);
+    const prevPageMatch = linkHeader.match(/&page=(\d+)>; rel="prev"/);
+    const lastPage = lastPageMatch
+      ? parseInt(lastPageMatch[1], 10)
+      : prevPageMatch
+      ? parseInt(prevPageMatch[1], 10) + 1
+      : 1;
+
+    totalItems = lastPage;
+  }
+
   const { orderBy, orderStyle } = await searchParams;
-  const repos: Repo[] = response.data.map((data: any) => ({
-    name: data.name,
-    description: data.description,
-    lang: data.language,
-    stars: data.stargazers_count,
-    owner: { name: data.owner.name },
-  }));
+  const repos: ReposResponse = {
+    totalItems,
+    data: response.data.map((data: any) => ({
+      name: data.name,
+      description: data.description,
+      lang: data.language,
+      stars: data.stargazers_count,
+      owner: { name: data.owner.name },
+    })),
+  };
 
   const orderByFilters = {
-    rating: () => orderByRating(repos, orderStyle),
+    rating: () => orderByRating(repos.data, orderStyle),
   };
 
   const orderedRepos = orderByFilters[orderBy as keyof typeof orderByFilters]();
 
-  return <ReposView repos={orderedRepos} />;
+  return <ReposView repos={{ totalItems, data: orderedRepos }} />;
 }
 
 function orderByRating(repos: Repo[], orderStyle: string): Repo[] {

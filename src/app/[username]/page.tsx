@@ -10,7 +10,7 @@ export default async function User({
   const { username } = await params;
   console.log({ username });
   const response = await axios(`https://api.github.com/users/${username}`);
-  console.log({ response });
+  console.log({ public: response.data.public_repos });
   const user: UserDetailResponse = {
     name: response.data.name,
     bio: response.data.bio,
@@ -18,6 +18,7 @@ export default async function User({
     email: response.data.email,
     followers: response.data.followers,
     following: response.data.following,
+    public_repos: response.data.public_repos,
     // name: "Ezequiel",
     // bio: "Minha Bio",
     // email: "exemplo@email.com",

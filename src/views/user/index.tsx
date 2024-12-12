@@ -82,7 +82,7 @@ export default function UserSearchView({ user }: UserSearchViewProps) {
           )}
 
           <Link
-            href={`/${params.username}/repos?orderBy=rating&orderStyle=desc`}
+            href={`/${params.username}/repos?orderBy=rating&orderStyle=desc&page=1`}
           >
             <Button variant="contained" color="primary">
               Mostrar Repositórios

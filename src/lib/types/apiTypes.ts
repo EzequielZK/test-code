@@ -5,6 +5,7 @@ export type UserDetailResponse = {
   image?: string;
   email?: string;
   bio?: string;
+  public_repos: number;
 };
 
 export type Repo = {
@@ -14,4 +15,9 @@ export type Repo = {
   lang: string;
   link?: string;
   owner: Pick<UserDetailResponse, "image">;
+};
+
+export type ReposResponse = {
+  totalItems: number;
+  data: Repo[];
 };
