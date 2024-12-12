@@ -5,8 +5,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import useDebounce from "@/lib/hooks/useDebounce";
+import Search from "@mui/icons-material/Search";
 
 export default function GlobalLayout({
   children,
@@ -14,6 +15,8 @@ export default function GlobalLayout({
   children: React.ReactNode;
 }>) {
   const route = useRouter();
+  const params = useParams();
+
   const { debounce, loading } = useDebounce();
   const searchUser = (value: string) => {
     route.push(`/${value}`);
@@ -33,11 +36,13 @@ export default function GlobalLayout({
             <Input
               id="search"
               placeholder="Pesquisar"
+              defaultValue={params.username}
               onChange={(event) => {
                 debounce(() => {
                   searchUser(event.target.value);
                 }, 1000)();
               }}
+              endAdornment={<Search />}
             />
           </Box>
         </Toolbar>

@@ -19,6 +19,7 @@ export default async function Repos({
 
   const linkHeader = response.headers.link;
 
+  //Check the last page for a total pages purpose
   if (linkHeader) {
     const lastPageMatch = linkHeader.match(/&page=(\d+)>; rel="last"/);
     const prevPageMatch = linkHeader.match(/&page=(\d+)>; rel="prev"/);
@@ -31,7 +32,7 @@ export default async function Repos({
     totalItems = lastPage;
   }
 
-  const { orderBy, orderStyle } = await searchParams;
+  const { orderBy = "rating", orderStyle = "desc" } = await searchParams;
   const repos: ReposResponse = {
     totalItems,
     data: response.data.map((data: any) => ({

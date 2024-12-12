@@ -10,7 +10,11 @@ export default async function User({
   const { username } = await params;
   console.log({ username });
   const response = await axios(`https://api.github.com/users/${username}`);
-  console.log({ public: response.data.public_repos });
+
+  if (response.status !== 200) {
+    throw response;
+  }
+
   const user: UserDetailResponse = {
     name: response.data.name,
     bio: response.data.bio,
