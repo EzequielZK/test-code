@@ -5,6 +5,10 @@ import Container, { ContainerProps } from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import { useRouter } from "next/navigation";
 
 type DataContainerProps = {
   children: ReactNode;
@@ -19,23 +23,36 @@ export default function DataContainer({
   title,
   subtitle,
 }: DataContainerProps) {
+  const route = useRouter();
   return (
-    <Container maxWidth={maxWidth}>
-      <Paper>
-        <Box p={3}>
-          {title && (
-            <Typography variant="h3" color="initial">
-              {title}
-            </Typography>
-          )}
-          {subtitle && (
-            <Typography variant="subtitle1" color="initial">
-              {subtitle}
-            </Typography>
-          )}
-          {children}
-        </Box>
-      </Paper>
-    </Container>
+    <Box position="relative">
+      <Tooltip title="Voltar">
+        <IconButton
+          aria-label="Voltar"
+          onClick={route.back}
+          sx={{ position: "sticky", top: 16, left: 16 }}
+        >
+          <ArrowBack />
+        </IconButton>
+      </Tooltip>
+
+      <Container maxWidth={maxWidth}>
+        <Paper>
+          <Box p={3}>
+            {title && (
+              <Typography variant="h3" color="initial">
+                {title}
+              </Typography>
+            )}
+            {subtitle && (
+              <Typography variant="subtitle1" color="initial">
+                {subtitle}
+              </Typography>
+            )}
+            {children}
+          </Box>
+        </Paper>
+      </Container>
+    </Box>
   );
 }

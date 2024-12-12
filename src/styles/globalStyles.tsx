@@ -21,21 +21,6 @@ export default function GlobalStyles() {
       background-color: #0e0e0e;
     }
 
-    .json-pretty {
-      background-color: #000;
-      padding: 16px;
-      border-radius: 8px;
-    }
-    .__json-string__ {
-      color: ${theme.palette.text.primary};
-    }
-    .__json-boolean__ {
-      color: ${theme.palette.secondary.main};
-    }
-    .__json-key__ {
-      color: ${theme.palette.primary.main};
-    }
-
     main {
       scroll-behavior: smooth;
     }

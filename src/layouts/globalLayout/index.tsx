@@ -35,7 +35,6 @@ export default function GlobalLayout({
               placeholder="Pesquisar"
               onChange={(event) => {
                 debounce(() => {
-                  console.log("OIII");
                   searchUser(event.target.value);
                 }, 1000)();
               }}
@@ -43,7 +42,14 @@ export default function GlobalLayout({
           </Box>
         </Toolbar>
       </AppBar>
-      {children}
+      <Box
+        id="main-container"
+        overflow="auto"
+        maxHeight="calc(100vh - 64px)"
+        height="100%"
+      >
+        {children}
+      </Box>
     </>
   );
 }

@@ -3,15 +3,15 @@ export type UserDetailResponse = {
   followers: number;
   following: number;
   image?: string;
-  email: string;
-  bio: string;
+  email?: string;
+  bio?: string;
 };
 
 export type Repo = {
   name: string;
   description: string;
-  rating: number;
+  stars: number;
   lang: string;
-  link: string;
+  link?: string;
   owner: Pick<UserDetailResponse, "image">;
 };
