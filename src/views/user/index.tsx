@@ -11,6 +11,9 @@ import Button from "@mui/material/Button";
 import DataContainer from "@/components/dataContainer";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import Folder from "@mui/icons-material/Folder";
+import { format } from "date-fns";
+import GitHub from "@mui/icons-material/GitHub";
 
 type UserSearchViewProps = {
   user: UserDetailResponse;
@@ -27,42 +30,69 @@ export default function UserSearchView({ user }: UserSearchViewProps) {
           sx={{ width: 120, height: 120 }}
         />
 
-        <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
-          <Box>
-            <Typography
-              variant="h5"
-              color="initial"
-              textAlign="center"
-              fontWeight={700}
-            >
-              {" "}
-              {user.name}
-            </Typography>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              gap={1}
-            >
-              <Group />
-              <Typography variant="subtitle2">
-                {user.followers} - Seguidor | Seguindo - {user.following}
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          gap={2}
+          // width="100%"
+        >
+          <Box display="flex" flexDirection="column" gap={2}>
+            <Box>
+              <Typography variant="h5" textAlign="center" fontWeight={700}>
+                {" "}
+                {user.name}
+              </Typography>
+              <Typography
+                variant="body1"
+                color="textDisabled"
+                textAlign="center"
+              >
+                {" "}
+                {user.login}
               </Typography>
             </Box>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              gap={1}
-            >
-              <Mail />
-              {user.email ? (
-                <Typography variant="subtitle2">{user.email}</Typography>
-              ) : (
-                <Typography variant="subtitle2" fontStyle="italic">
-                  {"<E-mail não informado>"}
+            <Typography variant="subtitle2" textAlign="center">
+              Usuário desde: {format(new Date(user.created_at), "dd/MM/yyyy")}
+            </Typography>
+            <Box display="flex" justifyContent="space-between" gap={4}>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                gap={1}
+              >
+                <Group />
+                <Typography variant="subtitle2">
+                  {user.followers} - Seguidor | Seguindo - {user.following}
                 </Typography>
-              )}
+              </Box>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                gap={1}
+              >
+                <Mail />
+                {user.email ? (
+                  <Typography variant="subtitle2">{user.email}</Typography>
+                ) : (
+                  <Typography variant="subtitle2" fontStyle="italic">
+                    {"<E-mail não informado>"}
+                  </Typography>
+                )}
+              </Box>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                gap={1}
+              >
+                <Folder />
+                <Typography variant="subtitle2">
+                  {user.public_repos} Repositórios públicos
+                </Typography>
+              </Box>
             </Box>
           </Box>
           {user.bio ? (
@@ -80,14 +110,25 @@ export default function UserSearchView({ user }: UserSearchViewProps) {
               {"<Sem informações na bio deste usuário>"}
             </Typography>
           )}
-
-          <Link
-            href={`/${params.username}/repos?orderBy=rating&orderStyle=desc&page=1`}
-          >
-            <Button variant="contained" color="primary">
-              Mostrar Repositórios
-            </Button>
-          </Link>
+          <Box display="flex" gap={2}>
+            <Link href={user.html_url} target="_blank">
+              <Button
+                fullWidth
+                startIcon={<GitHub />}
+                variant="outlined"
+                color="primary"
+              >
+                Ver Perfil no GitHub
+              </Button>
+            </Link>
+            <Link
+              href={`/${params.username}/repos?orderBy=rating&orderStyle=desc&page=1`}
+            >
+              <Button fullWidth variant="contained" color="primary">
+                Ver Repositórios
+              </Button>
+            </Link>
+          </Box>
         </Box>
       </Box>
     </DataContainer>

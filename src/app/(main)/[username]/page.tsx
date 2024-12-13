@@ -11,10 +11,6 @@ export default async function User({
   console.log({ username });
   const response = await axios(`https://api.github.com/users/${username}`);
 
-  if (response.status !== 200) {
-    throw response;
-  }
-
   const user: UserDetailResponse = {
     name: response.data.name,
     bio: response.data.bio,
@@ -23,11 +19,9 @@ export default async function User({
     followers: response.data.followers,
     following: response.data.following,
     public_repos: response.data.public_repos,
-    // name: "Ezequiel",
-    // bio: "Minha Bio",
-    // email: "exemplo@email.com",
-    // followers: 1,
-    // following: 0,
+    login: response.data.login,
+    html_url: response.data.html_url,
+    created_at: response.data.created_at,
   };
   return <UserSearchView user={user} />;
 }

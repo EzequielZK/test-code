@@ -8,19 +8,17 @@ import Input from "@mui/material/Input";
 import { useParams, useRouter } from "next/navigation";
 import useDebounce from "@/lib/hooks/useDebounce";
 import Search from "@mui/icons-material/Search";
+import useSearch from "@/lib/hooks/useSearch";
 
-export default function GlobalLayout({
+export default function MainLayoutComponent({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const route = useRouter();
   const params = useParams();
 
   const { debounce, loading } = useDebounce();
-  const searchUser = (value: string) => {
-    route.push(`/${value}`);
-  };
+  const { searchUser } = useSearch();
 
   return (
     <>
@@ -36,7 +34,6 @@ export default function GlobalLayout({
             <Input
               id="search"
               placeholder="Pesquisar"
-              defaultValue={params.username}
               onChange={(event) => {
                 debounce(() => {
                   searchUser(event.target.value);

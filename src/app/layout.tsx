@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import Theme from "@/lib/context/theme";
-import GlobalLayout from "@/layouts/globalLayout";
 import GlobalStyles from "@/styles/globalStyles";
 import { CssBaseline } from "@mui/material";
 
@@ -33,7 +32,7 @@ export default function RootLayout({
           <Theme>
             <GlobalStyles />
             <CssBaseline />
-            <GlobalLayout>{children}</GlobalLayout>
+            {children}
           </Theme>
         </AppRouterCacheProvider>
       </body>
