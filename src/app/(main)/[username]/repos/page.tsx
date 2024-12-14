@@ -19,7 +19,6 @@ export default async function Repos({
 
   const linkHeader = response.headers.link;
 
-  //Check the last page for a total pages purpose
   if (linkHeader) {
     const lastPageMatch = linkHeader.match(/&page=(\d+)>; rel="last"/);
     const prevPageMatch = linkHeader.match(/&page=(\d+)>; rel="prev"/);

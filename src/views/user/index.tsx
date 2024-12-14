@@ -55,7 +55,12 @@ export default function UserSearchView({ user }: UserSearchViewProps) {
             <Typography variant="subtitle2" textAlign="center">
               Usuário desde: {format(new Date(user.created_at), "dd/MM/yyyy")}
             </Typography>
-            <Box display="flex" justifyContent="space-between" gap={4}>
+            <Box
+              display="flex"
+              justifyContent={{ xs: "center", sm: "space-between" }}
+              gap={{ xs: 2, sm: 4 }}
+              flexWrap="wrap"
+            >
               <Box
                 display="flex"
                 alignItems="center"
@@ -110,7 +115,7 @@ export default function UserSearchView({ user }: UserSearchViewProps) {
               {"<Sem informações na bio deste usuário>"}
             </Typography>
           )}
-          <Box display="flex" gap={2}>
+          <Box display="flex" gap={2} flexWrap="wrap" justifyContent="center">
             <Link href={user.html_url} target="_blank">
               <Button
                 fullWidth

@@ -8,7 +8,7 @@ export default async function User({
   params: { username: string };
 }) {
   const { username } = await params;
-  console.log({ username });
+
   const response = await axios(`https://api.github.com/users/${username}`);
 
   const user: UserDetailResponse = {

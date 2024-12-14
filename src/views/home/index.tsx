@@ -10,9 +10,12 @@ import Search from "@mui/icons-material/Search";
 import useSearch from "@/lib/hooks/useSearch";
 import { ChangeEvent, FormEvent, KeyboardEvent } from "react";
 import homeStyles from "./home.module.css";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 export default function HomeView() {
   const { searchUser } = useSearch();
+  const theme = useTheme();
+  const match = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleOnEnterInput = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter") {
@@ -44,9 +47,11 @@ export default function HomeView() {
         gap={2}
       >
         <Box display="flex" flexDirection="column" alignItems="center">
-          <GitHub sx={{ width: 200, height: 200 }} />
+          <GitHub
+            sx={{ width: { xs: 160, sm: 200 }, height: { xs: 160, sm: 200 } }}
+          />
           <Typography
-            variant="h1"
+            variant={match ? "h4" : "h1"}
             color="initial"
             textAlign="center"
             fontWeight={700}
@@ -54,7 +59,7 @@ export default function HomeView() {
             GitHub
             <Typography
               component="span"
-              variant="h1"
+              variant={match ? "h4" : "h1"}
               textAlign="center"
               fontWeight={400}
             >

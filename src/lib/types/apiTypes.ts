@@ -23,7 +23,7 @@ export type Repo = {
   stars: number;
   lang: string;
   link?: string;
-  owner: Pick<UserDetailResponse, "image">;
+  owner: Pick<UserDetailResponse, "image" | "login">;
 };
 
 export type ReposResponse = {

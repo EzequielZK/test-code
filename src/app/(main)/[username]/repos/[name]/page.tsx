@@ -17,7 +17,10 @@ export default async function RepoDetails({
     lang: response.data.language,
     link: response.data.html_url,
     stars: response.data.stargazers_count,
-    owner: { image: response.data.owner.avatar_url },
+    owner: {
+      image: response.data.owner.avatar_url,
+      login: response.data.owner.login,
+    },
   };
 
   return <RepoDetailsView repo={repo} />;

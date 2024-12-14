@@ -9,14 +9,13 @@ import { useParams, useRouter } from "next/navigation";
 import useDebounce from "@/lib/hooks/useDebounce";
 import Search from "@mui/icons-material/Search";
 import useSearch from "@/lib/hooks/useSearch";
+import { CircularProgress } from "@mui/material";
 
 export default function MainLayoutComponent({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const params = useParams();
-
   const { debounce, loading } = useDebounce();
   const { searchUser } = useSearch();
 
@@ -30,16 +29,36 @@ export default function MainLayoutComponent({
             alignItems="center"
             width="100%"
           >
-            <Typography variant="h6">GitHub</Typography>
+            <Typography
+              variant="h6"
+              color="initial"
+              textAlign="center"
+              fontWeight={700}
+            >
+              GitHub
+              <Typography
+                component="span"
+                variant="h6"
+                textAlign="center"
+                fontWeight={400}
+              >
+                Researcher
+              </Typography>
+            </Typography>
             <Input
               id="search"
               placeholder="Pesquisar"
               onChange={(event) => {
-                debounce(() => {
-                  searchUser(event.target.value);
-                }, 1000)();
+                if (event.target.value) {
+                  debounce(() => {
+                    searchUser(event.target.value);
+                  }, 1000)();
+                }
               }}
-              endAdornment={<Search />}
+              sx={{ width: { xs: 140, sm: 200 } }}
+              endAdornment={
+                loading ? <CircularProgress size={15} /> : <Search />
+              }
             />
           </Box>
         </Toolbar>

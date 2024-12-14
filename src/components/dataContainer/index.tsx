@@ -24,13 +24,19 @@ export default function DataContainer({
   subtitle,
 }: DataContainerProps) {
   const route = useRouter();
+
   return (
     <Box position="relative">
       <Tooltip title="Voltar">
         <IconButton
           aria-label="Voltar"
           onClick={route.back}
-          sx={{ position: "sticky", top: 16, left: 16 }}
+          sx={{
+            position: { xs: "unset", sm: "sticky" },
+            top: 16,
+            left: 16,
+            my: { xs: 2, sm: 0 },
+          }}
         >
           <ArrowBack />
         </IconButton>

@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import Pagination from "@mui/material/Pagination";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useMediaQuery, useTheme, Avatar } from "@mui/material";
 
 type ReposViewProps = {
   repos: ReposResponse;
@@ -22,6 +23,8 @@ export default function ReposView({ repos }: ReposViewProps) {
   const route = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
+  const theme = useTheme();
+  const match = useMediaQuery(theme.breakpoints.down("sm"));
 
   const searchOrderBy = searchParams.get("orderBy") ?? "rating";
   const searchOrderStyle = searchParams.get("orderStyle") ?? "desc";
@@ -86,35 +89,37 @@ export default function ReposView({ repos }: ReposViewProps) {
         {repos.data.map((repo, index) => (
           <Box key={index} display="flex" flexDirection="column" gap={2}>
             <Box>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Typography variant="h5" fontWeight={700}>
-                  {" "}
-                  {repo.name}
-                </Typography>
-                <Link href={`/${params.username}/repos/${repo.name}`}>
-                  <Button variant="text" color="primary">
-                    Ver Detalhes
-                  </Button>
-                </Link>
-              </Box>
+              <Typography variant={match ? "h6" : "h5"} fontWeight={700}>
+                {" "}
+                {repo.name}
+              </Typography>
+
               <Typography variant="subtitle2">{repo.description}</Typography>
             </Box>
-            <Box display="flex" alignItems="center" gap={2}>
-              {repo.lang && (
-                <Box display="flex" alignItems="center" gap={0.5}>
-                  <Code fontSize="small" />
-                  <Typography variant="caption">{repo.lang}</Typography>
-                </Box>
-              )}
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              width="100%"
+            >
+              <Box display="flex" alignItems="center" gap={2}>
+                {repo.lang && (
+                  <Box display="flex" alignItems="center" gap={0.5}>
+                    <Code fontSize="small" />
+                    <Typography variant="caption">{repo.lang}</Typography>
+                  </Box>
+                )}
 
-              <Box display="flex" alignItems="center">
-                <Star fontSize="small" sx={{ color: "yellow" }} />
-                <Typography variant="caption">{repo.stars}</Typography>
+                <Box display="flex" alignItems="center">
+                  <Star fontSize="small" sx={{ color: "yellow" }} />
+                  <Typography variant="caption">{repo.stars}</Typography>
+                </Box>
               </Box>
+              <Link href={`/${params.username}/repos/${repo.name}`}>
+                <Button variant="text" color="primary">
+                  Ver Detalhes
+                </Button>
+              </Link>
             </Box>
             <Divider />
           </Box>

@@ -9,15 +9,19 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import NoAccounts from "@mui/icons-material/NoAccounts";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function NotFoundErrorPage({
   error,
-  reset,
 }: {
   error: Error & { status: number };
-  reset: () => void;
 }) {
+  useEffect(() => {
+    console.error(error.message);
+  }, []);
+
   const route = useRouter();
+
   return (
     <Container maxWidth="md">
       <Box
