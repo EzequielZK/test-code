@@ -14,6 +14,7 @@ import { useMediaQuery, useTheme, Chip, Avatar, Tooltip } from "@mui/material";
 import useFavorite from "@/lib/hooks/useFavorite";
 import Close from "@mui/icons-material/Close";
 import Link from "next/link";
+import { FavoriteUser } from "@/lib/types/apiTypes";
 
 export default function HomeView() {
   const { searchUser } = useSearch();
@@ -41,7 +42,9 @@ export default function HomeView() {
     searchUser(data.search);
   };
 
-  const favorites = JSON.parse(localStorage.getItem("favorites")!);
+  const favorites: FavoriteUser[] = JSON.parse(
+    localStorage.getItem("favorites")!
+  );
 
   return (
     <Container maxWidth="sm">
@@ -101,7 +104,7 @@ export default function HomeView() {
               Favoritos
             </Typography>
             <Box display="flex" gap={2} flexWrap="wrap">
-              {favorites.map((user: any) => (
+              {favorites.map((user) => (
                 <Link key={user.login} href={`/${user.login}`}>
                   <Chip
                     key={user.login}

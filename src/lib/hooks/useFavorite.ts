@@ -1,11 +1,11 @@
 "use client";
 
-import { FavoriteUser, UserDetailResponse } from "../types/apiTypes";
+import { FavoriteUser } from "../types/apiTypes";
 import { useRouter } from "next/navigation";
 
 export default function useFavorite() {
   const route = useRouter();
-  const addToFavorites = (user: UserDetailResponse) => {
+  const addToFavorites = (user: FavoriteUser) => {
     const favorites: FavoriteUser[] = JSON.parse(
       localStorage.getItem("favorites")!
     );
@@ -21,7 +21,7 @@ export default function useFavorite() {
     route.refresh();
   };
 
-  const removeFromFavorites = (user: UserDetailResponse) => {
+  const removeFromFavorites = (user: FavoriteUser) => {
     const favorites: FavoriteUser[] = JSON.parse(
       localStorage.getItem("favorites")!
     );
