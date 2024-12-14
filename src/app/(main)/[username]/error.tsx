@@ -1,11 +1,7 @@
 "use client";
 
-import NotFoundErrorPage from "@/components/error/NotFoundErrorPage";
+import ErrorPage from "@/components/error/ErrorPage";
 
-export default function Error({
-  error,
-}: {
-  error: Error & { status: number };
-}) {
-  return <NotFoundErrorPage error={error} />;
+export default function Error() {
+  return <ErrorPage />;
 }

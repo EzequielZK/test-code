@@ -4,10 +4,10 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import NoAccounts from "@mui/icons-material/NoAccounts";
 import { useRouter } from "next/navigation";
+import Error from "@mui/icons-material/Error";
 
-export default function NotFoundErrorPage() {
+export default function ErrorPage() {
   const route = useRouter();
   return (
     <Container maxWidth="md">
@@ -21,9 +21,9 @@ export default function NotFoundErrorPage() {
       >
         <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
           <Box display="flex" flexDirection="column" alignItems="center">
-            <NoAccounts sx={{ width: 200, height: 200 }} />
+            <Error sx={{ width: 200, height: 200 }} />
             <Typography variant="h3" textAlign="center">
-              Usuário não encontrado
+              Ocorreu um erro interno. Tente novamente mais tarde
             </Typography>
           </Box>
           <Button fullWidth variant="contained" onClick={route.back}>
