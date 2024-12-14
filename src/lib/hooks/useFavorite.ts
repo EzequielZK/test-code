@@ -1,10 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FavoriteUser } from "../types/apiTypes";
 
 export default function useFavorite() {
   const [favorites, setFavorites] = useState<FavoriteUser[]>([]);
+
+  useEffect(() => {
+    const favorites: FavoriteUser[] = JSON.parse(
+      localStorage.getItem("favorites")!
+    );
+
+    setFavorites(favorites ?? []);
+  }, []);
 
   const addToFavorites = (user: FavoriteUser) => {
     const favorites: FavoriteUser[] = JSON.parse(
@@ -31,7 +39,7 @@ export default function useFavorite() {
     );
 
     localStorage.setItem("favorites", JSON.stringify(newFavorites));
-    setFavorites(favorites);
+    setFavorites(newFavorites);
   };
 
   return { favorites, addToFavorites, removeFromFavorites };

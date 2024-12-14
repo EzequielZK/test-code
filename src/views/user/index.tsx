@@ -26,8 +26,7 @@ type UserSearchViewProps = {
 export default function UserSearchView({ user }: UserSearchViewProps) {
   const params = useParams();
 
-  const { addToFavorites, removeFromFavorites } = useFavorite();
-  const { favorites } = useFavorite();
+  const { favorites, addToFavorites, removeFromFavorites } = useFavorite();
   const isFavorite = favorites.find(
     (favorite) => favorite.login === user.login
   );
