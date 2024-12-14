@@ -26,8 +26,8 @@ export default async function User({
       created_at: response.data.created_at,
     };
     return <UserSearchView user={user} />;
-  } catch (err: any) {
-    if (err.status === 404) {
+  } catch (err: unknown) {
+    if (axios.isAxiosError(err) && err.status === 404) {
       notFound();
     }
     throw err;
