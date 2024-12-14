@@ -5,7 +5,7 @@ import axios from "axios";
 export default async function User({
   params,
 }: {
-  params: { username: string };
+  params: Promise<{ username: string }>;
 }) {
   const { username } = await params;
 

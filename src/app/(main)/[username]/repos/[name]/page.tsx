@@ -5,7 +5,7 @@ import axios from "axios";
 export default async function RepoDetails({
   params,
 }: {
-  params: { name: string; username: string };
+  params: Promise<{ name: string; username: string }>;
 }) {
   const { name, username } = await params;
   const response = await axios(
