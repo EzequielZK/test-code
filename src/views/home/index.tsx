@@ -66,7 +66,6 @@ export default function HomeView() {
           />
           <Typography
             variant={match ? "h4" : "h1"}
-            color="initial"
             textAlign="center"
             fontWeight={700}
           >
@@ -86,6 +85,7 @@ export default function HomeView() {
             <TextField
               name="search"
               fullWidth
+              color="primary"
               id="search-user-input"
               label="Pesquisar por usuário"
               onKeyDown={handleOnEnterInput}
@@ -113,7 +113,6 @@ export default function HomeView() {
                   <Chip
                     key={user.login}
                     component="div"
-                    variant="filled"
                     deleteIcon={
                       <Tooltip title="Remover dos favoritos">
                         <Close fontSize="small" />
@@ -131,7 +130,7 @@ export default function HomeView() {
                           alt={`Avatar de ${user.login}`}
                           sx={{ width: 24, height: 24 }}
                         />{" "}
-                        <Typography variant="subtitle2" color="initial">
+                        <Typography variant="subtitle2">
                           {user.login}
                         </Typography>
                       </Box>

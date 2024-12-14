@@ -28,12 +28,7 @@ export default function MainLayoutComponent({
             alignItems="center"
             width="100%"
           >
-            <Typography
-              variant="h6"
-              color="initial"
-              textAlign="center"
-              fontWeight={700}
-            >
+            <Typography variant="h6" textAlign="center" fontWeight={700}>
               GitHub
               <Typography
                 component="span"

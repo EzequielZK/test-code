@@ -7,6 +7,6 @@ const MuiImage = styled(Image, {
   name: "MuiImage",
   slot: "root",
   overridesResolver: (props, styles) => [styles.root],
-})(({ theme }) => ({}));
+})(() => ({}));
 
 export default MuiImage;

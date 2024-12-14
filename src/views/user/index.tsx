@@ -129,17 +129,12 @@ export default function UserSearchView({ user }: UserSearchViewProps) {
               </Box>
             </Box>
             {user.bio ? (
-              <Typography variant="body1" textAlign="center" color="initial">
+              <Typography variant="body1" textAlign="center">
                 {" "}
                 {user.bio}
               </Typography>
             ) : (
-              <Typography
-                variant="body1"
-                textAlign="center"
-                fontStyle="italic"
-                color="initial"
-              >
+              <Typography variant="body1" textAlign="center" fontStyle="italic">
                 {"<Sem informações na bio deste usuário>"}
               </Typography>
             )}

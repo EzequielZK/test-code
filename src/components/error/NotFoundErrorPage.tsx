@@ -15,7 +15,7 @@ export default function NotFoundErrorPage({
 }) {
   useEffect(() => {
     console.error(error.message);
-  }, []);
+  }, [error.message]);
 
   const route = useRouter();
 
@@ -32,7 +32,7 @@ export default function NotFoundErrorPage({
         <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
           <Box display="flex" flexDirection="column" alignItems="center">
             <NoAccounts sx={{ width: 200, height: 200 }} />
-            <Typography variant="h3" color="initial" textAlign="center">
+            <Typography variant="h3" textAlign="center">
               Usuário não encontrado
             </Typography>
           </Box>

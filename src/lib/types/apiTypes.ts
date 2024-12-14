@@ -16,8 +16,8 @@ export type FavoriteUser = Pick<UserDetailResponse, "image" | "login">;
 export type Repo = {
   name: string;
   description: string;
-  stars: number;
-  lang: string;
+  stargazers_count: number;
+  language: string;
   link?: string;
   owner: Pick<UserDetailResponse, "image" | "login">;
 };

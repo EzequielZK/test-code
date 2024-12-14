@@ -14,9 +14,9 @@ export default async function RepoDetails({
   const repo: Repo = {
     name: response.data.name,
     description: response.data.description,
-    lang: response.data.language,
+    language: response.data.language,
     link: response.data.html_url,
-    stars: response.data.stargazers_count,
+    stargazers_count: response.data.stargazers_count,
     owner: {
       image: response.data.owner.avatar_url,
       login: response.data.owner.login,

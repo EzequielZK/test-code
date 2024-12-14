@@ -45,15 +45,9 @@ export default function DataContainer({
       <Container maxWidth={maxWidth}>
         <Paper>
           <Box p={3}>
-            {title && (
-              <Typography variant="h3" color="initial">
-                {title}
-              </Typography>
-            )}
+            {title && <Typography variant="h3">{title}</Typography>}
             {subtitle && (
-              <Typography variant="subtitle1" color="initial">
-                {subtitle}
-              </Typography>
+              <Typography variant="subtitle1">{subtitle}</Typography>
             )}
             {children}
           </Box>

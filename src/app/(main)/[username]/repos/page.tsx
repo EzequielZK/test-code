@@ -34,12 +34,11 @@ export default async function Repos({
   const { orderBy = "rating", orderStyle = "desc" } = await searchParams;
   const repos: ReposResponse = {
     totalItems,
-    data: response.data.map((data: any) => ({
+    data: response.data.map((data: Repo) => ({
       name: data.name,
       description: data.description,
-      lang: data.language,
-      stars: data.stargazers_count,
-      owner: { name: data.owner.name },
+      language: data.language,
+      stargazers_count: data.stargazers_count,
     })),
   };
 
@@ -54,8 +53,8 @@ export default async function Repos({
 
 function orderByRating(repos: Repo[], orderStyle: string): Repo[] {
   const orderStyles = {
-    asc: () => repos.sort((a, b) => a.stars - b.stars),
-    desc: () => repos.sort((a, b) => b.stars - a.stars),
+    asc: () => repos.sort((a, b) => a.stargazers_count - b.stargazers_count),
+    desc: () => repos.sort((a, b) => b.stargazers_count - a.stargazers_count),
   };
 
   return orderStyles[orderStyle as keyof typeof orderStyles]();

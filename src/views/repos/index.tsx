@@ -103,16 +103,18 @@ export default function ReposView({ repos }: ReposViewProps) {
               width="100%"
             >
               <Box display="flex" alignItems="center" gap={2}>
-                {repo.lang && (
+                {repo.language && (
                   <Box display="flex" alignItems="center" gap={0.5}>
                     <Code fontSize="small" />
-                    <Typography variant="caption">{repo.lang}</Typography>
+                    <Typography variant="caption">{repo.language}</Typography>
                   </Box>
                 )}
 
                 <Box display="flex" alignItems="center">
                   <Star fontSize="small" sx={{ color: "yellow" }} />
-                  <Typography variant="caption">{repo.stars}</Typography>
+                  <Typography variant="caption">
+                    {repo.stargazers_count}
+                  </Typography>
                 </Box>
               </Box>
               <Link href={`/${params.username}/repos/${repo.name}`}>
