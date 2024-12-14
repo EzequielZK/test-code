@@ -1,10 +1,7 @@
 "use client";
 
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import GitHub from "@mui/icons-material/GitHub";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import NoAccounts from "@mui/icons-material/NoAccounts";

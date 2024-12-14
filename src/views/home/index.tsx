@@ -8,7 +8,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Search from "@mui/icons-material/Search";
 import useSearch from "@/lib/hooks/useSearch";
-import { ChangeEvent, FormEvent, KeyboardEvent } from "react";
+import { FormEvent, KeyboardEvent } from "react";
 import homeStyles from "./home.module.css";
 import {
   useMediaQuery,

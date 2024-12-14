@@ -1,7 +1,7 @@
 "use client";
 
 import DataContainer from "@/components/dataContainer";
-import { Repo, ReposResponse } from "@/lib/types/apiTypes";
+import { ReposResponse } from "@/lib/types/apiTypes";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -13,7 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import Pagination from "@mui/material/Pagination";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useMediaQuery, useTheme, Avatar } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 type ReposViewProps = {
   repos: ReposResponse;

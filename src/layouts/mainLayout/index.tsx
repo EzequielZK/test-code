@@ -5,7 +5,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
-import { useParams, useRouter } from "next/navigation";
 import useDebounce from "@/lib/hooks/useDebounce";
 import Search from "@mui/icons-material/Search";
 import useSearch from "@/lib/hooks/useSearch";

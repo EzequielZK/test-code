@@ -5,7 +5,6 @@ import Group from "@mui/icons-material/Group";
 import Mail from "@mui/icons-material/Mail";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import DataContainer from "@/components/dataContainer";

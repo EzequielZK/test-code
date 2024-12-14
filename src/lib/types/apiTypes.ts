@@ -11,11 +11,7 @@ export type UserDetailResponse = {
   html_url: string;
 };
 
-export type UsersListResponse = Array<{
-  id: number;
-  login: string;
-  image?: string;
-}>;
+export type FavoriteUser = Pick<UserDetailResponse, "image" | "login">;
 
 export type Repo = {
   name: string;
