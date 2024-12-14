@@ -6,8 +6,8 @@ export default async function Repos({
   searchParams,
   params,
 }: {
-  searchParams: { [key: string]: string };
-  params: { username: string };
+  searchParams: Promise<{ [key: string]: string }>;
+  params: Promise<{ username: string }>;
 }) {
   const { username } = await params;
   const { perPage = 10, page = 1 } = await searchParams;
