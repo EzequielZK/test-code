@@ -10,14 +10,7 @@ import Search from "@mui/icons-material/Search";
 import useSearch from "@/lib/hooks/useSearch";
 import { FormEvent, KeyboardEvent } from "react";
 import homeStyles from "./home.module.css";
-import {
-  useMediaQuery,
-  useTheme,
-  Chip,
-  Avatar,
-  IconButton,
-  Tooltip,
-} from "@mui/material";
+import { useMediaQuery, useTheme, Chip, Avatar, Tooltip } from "@mui/material";
 import useFavorite from "@/lib/hooks/useFavorite";
 import Close from "@mui/icons-material/Close";
 import Link from "next/link";
