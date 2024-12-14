@@ -18,7 +18,6 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Tooltip from "@mui/material/Tooltip";
 import Favorite from "@mui/icons-material/Favorite";
 import useFavorite from "@/lib/hooks/useFavorite";
-import useIsFavorite from "@/lib/hooks/useIsFavorite";
 
 type UserSearchViewProps = {
   user: UserDetailResponse;
@@ -28,7 +27,10 @@ export default function UserSearchView({ user }: UserSearchViewProps) {
   const params = useParams();
 
   const { addToFavorites, removeFromFavorites } = useFavorite();
-  const { isFavorite } = useIsFavorite(user);
+  const { favorites } = useFavorite();
+  const isFavorite = favorites.find(
+    (favorite) => favorite.login === user.login
+  );
 
   const addFavorite = () => {
     addToFavorites(user);

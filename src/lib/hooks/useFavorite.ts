@@ -1,10 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { FavoriteUser } from "../types/apiTypes";
-import { useRouter } from "next/navigation";
 
 export default function useFavorite() {
-  const route = useRouter();
+  const [favorites, setFavorites] = useState<FavoriteUser[]>([]);
+
   const addToFavorites = (user: FavoriteUser) => {
     const favorites: FavoriteUser[] = JSON.parse(
       localStorage.getItem("favorites")!
@@ -18,7 +19,7 @@ export default function useFavorite() {
         JSON.stringify([{ login: user.login, image: user.image }])
       );
     }
-    route.refresh();
+    setFavorites(favorites);
   };
 
   const removeFromFavorites = (user: FavoriteUser) => {
@@ -30,8 +31,8 @@ export default function useFavorite() {
     );
 
     localStorage.setItem("favorites", JSON.stringify(newFavorites));
-    route.refresh();
+    setFavorites(favorites);
   };
 
-  return { addToFavorites, removeFromFavorites };
+  return { favorites, addToFavorites, removeFromFavorites };
 }

@@ -14,14 +14,13 @@ import { useMediaQuery, useTheme, Chip, Avatar, Tooltip } from "@mui/material";
 import useFavorite from "@/lib/hooks/useFavorite";
 import Close from "@mui/icons-material/Close";
 import Link from "next/link";
-import { FavoriteUser } from "@/lib/types/apiTypes";
 
 export default function HomeView() {
   const { searchUser } = useSearch();
   const theme = useTheme();
   const match = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const { removeFromFavorites } = useFavorite();
+  const { removeFromFavorites, favorites } = useFavorite();
 
   const handleOnEnterInput = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter") {
@@ -41,10 +40,6 @@ export default function HomeView() {
 
     searchUser(data.search);
   };
-
-  const favorites: FavoriteUser[] = JSON.parse(
-    localStorage.getItem("favorites")!
-  );
 
   return (
     <Container maxWidth="sm">
