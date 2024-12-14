@@ -3,7 +3,6 @@ export default function debounce(callback: () => void, delay: number) {
 
   return () => {
     clearTimeout(timeout);
-    console.log("asdfsad");
     timeout = setTimeout(callback, delay);
   };
 }
