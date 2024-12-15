@@ -9,6 +9,7 @@ import useDebounce from "@/lib/hooks/useDebounce";
 import Search from "@mui/icons-material/Search";
 import useSearch from "@/lib/hooks/useSearch";
 import { CircularProgress } from "@mui/material";
+import Link from "next/link";
 
 export default function MainLayoutComponent({
   children,
@@ -28,17 +29,19 @@ export default function MainLayoutComponent({
             alignItems="center"
             width="100%"
           >
-            <Typography variant="h6" textAlign="center" fontWeight={700}>
-              GitHub
-              <Typography
-                component="span"
-                variant="h6"
-                textAlign="center"
-                fontWeight={400}
-              >
-                Researcher
+            <Link href="/">
+              <Typography variant="h6" textAlign="center" fontWeight={700}>
+                GitHub
+                <Typography
+                  component="span"
+                  variant="h6"
+                  textAlign="center"
+                  fontWeight={400}
+                >
+                  Researcher
+                </Typography>
               </Typography>
-            </Typography>
+            </Link>
             <Input
               id="search"
               placeholder="Pesquisar"
